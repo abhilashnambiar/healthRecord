@@ -7,7 +7,6 @@ import com.teamVoid.healthRecord.model.User;
 import com.teamVoid.healthRecord.repository.UserRepository;
 import com.teamVoid.healthRecord.security.ApplicationUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -66,7 +65,9 @@ public class UserService implements UserDetailsService {
     public String updateProfile(String username, Profile profile) {
         User user = userRepository.getUserByUsername(username);
         if (user == null) throw new IllegalArgumentException(username + " not found");
-        if (user.getProfile().getImage() != null) profile.setImage(user.getProfile().getImage());
+        if (user.getProfile() != null) {
+            if (user.getProfile().getImage() != null) profile.setImage(user.getProfile().getImage());
+        }
         user.setProfile(profile);
         userRepository.save(user);
         return "profile updated for " + username;

@@ -21,6 +21,10 @@ public class PatientCaseService {
         return patientCaseRepository.findAll();
     }
 
+    public List<PatientCase> getPatientCasesByUsername(String username) {
+        return patientCaseRepository.getPatientCasesByUsername(username);
+    }
+
     public PatientCase getPatientCase(String username, Long id) {
         PatientCase patientCase = patientCaseRepository.getOne(id);
         if (patientCase.getUsername() != username) {

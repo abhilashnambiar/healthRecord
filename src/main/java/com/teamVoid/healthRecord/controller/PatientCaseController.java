@@ -22,6 +22,12 @@ public class PatientCaseController {
         return patientCaseService.getPatientCases();
     }
 
+    @GetMapping(path = "get/{username}/cases")
+    @PreAuthorize("authentication.principal == #username || hasAnyAuthority('DOCTOR')")
+    public List<PatientCase> getPatientCasesByUsername(@PathVariable String username) {
+        return patientCaseService.getPatientCasesByUsername(username);
+    }
+
     @GetMapping(path = "get/case/{username}/{id}")
     @PreAuthorize("authentication.principal == #username || hasAnyAuthority('DOCTOR')")
     public PatientCase getPatientCase(@PathVariable("username") String username, @PathVariable("id") Long id) {
