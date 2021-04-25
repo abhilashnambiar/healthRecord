@@ -1,9 +1,6 @@
 package com.teamVoid.healthRecord.controller;
 
-import com.teamVoid.healthRecord.model.Doctor;
-import com.teamVoid.healthRecord.model.Patient;
-import com.teamVoid.healthRecord.model.Profile;
-import com.teamVoid.healthRecord.model.User;
+import com.teamVoid.healthRecord.model.*;
 import com.teamVoid.healthRecord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,25 +21,25 @@ public class UserController {
     }
 
     @GetMapping(path = "get/{username}")
-    @PreAuthorize("authentication.principal == #username || hasAnyAuthority('ADMIN')")
+    @PreAuthorize("authentication.principal == #username || hasAnyAuthority('ROOT_ADMIN','HOSP_ADMIN','DOCTOR')")
     public User getUser(@PathVariable("username") String username) {
         return userService.getUser(username);
     }
 
-    @GetMapping(path = "get/users")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
-    public List<User> getUsers() {
-        return userService.getUsers();
-    }
+//    @GetMapping(path = "get/users")
+//    @PreAuthorize("hasAnyAuthority('ADMIN')")
+//    public List<User> getUsers() {
+//        return userService.getUsers();
+//    }
 
     @PostMapping(path = "add/user")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROOT_ADMIN','HOSP_ADMIN')")
     public String addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
     @PutMapping(path = "update/{username}/password")
-    @PreAuthorize("authentication.principal == #username || hasAnyAuthority('ADMIN')")
+    @PreAuthorize("authentication.principal == #username || hasAnyAuthority('ROOT_ADMIN','HOSP_ADMIN')")
     public String updatePassword(@PathVariable String username, @RequestBody User user){
         return userService.updatePassword(username, user);
     }
@@ -72,13 +69,13 @@ public class UserController {
     }
 
     @DeleteMapping(path = "delete/user/{username}")
-    @PreAuthorize("authentication.principal == #username || hasAnyAuthority('ADMIN')")
+    @PreAuthorize("authentication.principal == #username || hasAnyAuthority('ROOT_ADMIN')")
     public String deleteUser(@PathVariable String username) {
         return userService.deleteUser(username);
     }
 
     @DeleteMapping(path = "delete/{username}/image")
-    @PreAuthorize("authentication.principal == #username || hasAnyAuthority('DOCTOR')")
+    @PreAuthorize("authentication.principal == #username || hasAnyAuthority('ROOT_ADMIN')")
     public String deleteImage(@PathVariable String username) {
         return userService.deleteImage(username);
     }

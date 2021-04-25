@@ -35,6 +35,22 @@ public class User {
     @JoinColumn(name = "doctor", referencedColumnName = "username")
     private List<Appointment> doctorAppointments;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "adminId", referencedColumnName = "username")
+    private List<HospitalAdminMap> hospitalAdminMaps;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "doctorId", referencedColumnName = "username")
+    private List<HospitalDoctorMap> hospitalDoctorMaps;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "doctorId", referencedColumnName = "username")
+    private List<DoctorPatientMap> associatedDoctors;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "patientId", referencedColumnName = "username")
+    private List<DoctorPatientMap> associatedPatients;
+
     public User() {
     }
 

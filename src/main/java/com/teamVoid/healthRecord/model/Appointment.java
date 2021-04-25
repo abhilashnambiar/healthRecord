@@ -10,7 +10,7 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String doctor;
-    private Long hospital;
+    private String hospital;
     @Column(name = "patient_case")
     private Long patientCase;
     private LocalDateTime time;
@@ -25,7 +25,7 @@ public class Appointment {
         this.time = LocalDateTime.now();
     }
 
-    public Appointment(Long hospital, Long patientCase, String diagnosis, String prescription, String treatment) {
+    public Appointment(String hospital, Long patientCase, String diagnosis, String prescription, String treatment) {
         this();
         this.hospital = hospital;
         this.patientCase = patientCase;
@@ -50,11 +50,11 @@ public class Appointment {
         this.doctor = doctor;
     }
 
-    public Long getHospital() {
+    public String getHospital() {
         return hospital;
     }
 
-    public void setHospital(Long hospital) {
+    public void setHospital(String hospital) {
         this.hospital = hospital;
     }
 

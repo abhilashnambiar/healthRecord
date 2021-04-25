@@ -7,8 +7,7 @@ import java.util.List;
 public class Hospital {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
     private String name;
     private String address;
     private String city;
@@ -18,21 +17,30 @@ public class Hospital {
     @JoinColumn(name = "hospital", referencedColumnName = "id")
     List<Appointment> appointments;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hospitalId", referencedColumnName = "id")
+    List<HospitalAdminMap> hospitalAdminMaps;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hospitalId", referencedColumnName = "id")
+    List<HospitalDoctorMap> hospitalDoctorMaps;
+
     public Hospital() {
     }
 
-    public Hospital(String name, String address, String city, String phone) {
+    public Hospital(String id, String name, String address, String city, String phone) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
         this.phone = phone;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

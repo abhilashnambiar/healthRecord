@@ -21,6 +21,10 @@ public class PatientCaseService {
         return patientCaseRepository.findAll();
     }
 
+    public PatientCase getPatientCase(Long id) {
+        return patientCaseRepository.getOne(id);
+    }
+
     public List<PatientCase> getPatientCasesByUsername(String username) {
         return patientCaseRepository.getPatientCasesByUsername(username);
     }

@@ -27,11 +27,11 @@ public class HospitalService {
             throw new IllegalArgumentException(hospital.getName() + " in " + hospital.getCity() + " already exists");
         }
         hospitalRepository.save(hospital);
-        return hospital.getName() + " + added with id:" + hospital.getId();
+        return hospital.getName() + " added with id:" + hospital.getId();
     }
 
-    public String updateHospital(Long id, Hospital hospital) {
-        if (hospitalRepository.findById(id).isEmpty()) {
+    public String updateHospital(String id, Hospital hospital) {
+        if (hospitalRepository.getHospitalById(id) == null) {
             throw new IllegalArgumentException("hospital with id:" + id + " doesn't exist");
         }
         hospital.setId(id);
@@ -39,11 +39,11 @@ public class HospitalService {
         return "id:" + hospital.getId() + " updated";
     }
 
-    public String deleteHospital(Long id) {
-        if (hospitalRepository.findById(id).isEmpty()) {
-            throw new IllegalArgumentException("hospital with id:" + id + " doesn't exist");
-        }
-        hospitalRepository.deleteById(id);
-        return "id:" + id + " deleted";
-    }
+//    public String deleteHospital(Long id) {
+//        if (hospitalRepository.findById(id).isEmpty()) {
+//            throw new IllegalArgumentException("hospital with id:" + id + " doesn't exist");
+//        }
+//        hospitalRepository.deleteById(id);
+//        return "id:" + id + " deleted";
+//    }
 }

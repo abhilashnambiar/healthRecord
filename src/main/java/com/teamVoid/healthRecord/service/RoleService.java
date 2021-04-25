@@ -15,7 +15,7 @@ public class RoleService {
 
     private final RoleRepository roleRepository;
 
-    private final HashSet<String> roleSet = new HashSet<>(Arrays.asList("ADMIN", "DOCTOR", "PATIENT"));
+    private final HashSet<String> roleSet = new HashSet<>(Arrays.asList("ROOT_ADMIN", "HOSP_ADMIN", "DOCTOR", "PATIENT"));
 
     @Autowired
     public RoleService(RoleRepository roleRepository) {
@@ -27,8 +27,7 @@ public class RoleService {
     }
 
     public String addRole(Role role) {
-        role.setRoleName(role.getRoleName().toUpperCase());
-        if (!roleSet.contains(role.getRoleName())) throw new IllegalArgumentException("invalid role | available - (ADMIN, PATIENT, DOCTOR)");
+        if (!roleSet.contains(role.getRoleName())) throw new IllegalArgumentException("invalid role | available - (ROOT_ADMIN, HOSP_ADMIN, PATIENT, DOCTOR)");
         List<Role> roles = roleRepository.getRolesByUsername(role.getUsername());
         for (Role i:roles) {
             if (i.getRoleName().equals(role.getRoleName())) throw new IllegalArgumentException(role.getUsername() + " already authorized with " + role.getRoleName());

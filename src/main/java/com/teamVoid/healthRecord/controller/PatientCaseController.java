@@ -1,8 +1,10 @@
 package com.teamVoid.healthRecord.controller;
 
 import com.teamVoid.healthRecord.model.PatientCase;
+import com.teamVoid.healthRecord.service.MappingService;
 import com.teamVoid.healthRecord.service.PatientCaseService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +13,11 @@ import java.util.List;
 public class PatientCaseController {
 
     private final PatientCaseService patientCaseService;
+    private final MappingService mappingService;
 
-    public PatientCaseController(PatientCaseService patientCaseService) {
+    public PatientCaseController(PatientCaseService patientCaseService, MappingService mappingService) {
         this.patientCaseService = patientCaseService;
+        this.mappingService = mappingService;
     }
 
     @GetMapping(path = "get/cases")
@@ -37,12 +41,15 @@ public class PatientCaseController {
     @PostMapping(path = "add/case")
     @PreAuthorize("hasAnyAuthority('DOCTOR')")
     public String addPatientCase(@RequestBody PatientCase patientCase) {
-        return patientCaseService.addPatientCase(patientCase);
+        String principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        if (mappingService.checkPatientDoctor(principal, patientCase.getUsername()))
+            return patientCaseService.addPatientCase(patientCase);
+        else throw new IllegalArgumentException("doctor not mapped with patient");
     }
-
-    @DeleteMapping(path = "delete/case/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
-    public String deletePatientCase(@PathVariable Long id) {
-        return patientCaseService.deletePatientCase(id);
-    }
+//
+//    @DeleteMapping(path = "delete/case/{id}")
+//    @PreAuthorize("hasAnyAuthority('ADMIN')")
+//    public String deletePatientCase(@PathVariable Long id) {
+//        return patientCaseService.deletePatientCase(id);
+//    }
 }
