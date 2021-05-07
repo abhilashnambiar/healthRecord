@@ -38,12 +38,15 @@ public class HospitalService {
         hospitalRepository.save(hospital);
         return "id:" + hospital.getId() + " updated";
     }
+    public Hospital getHospital(String id) {
+        return hospitalRepository.getHospitalById(id);
+    }
 
-//    public String deleteHospital(Long id) {
-//        if (hospitalRepository.findById(id).isEmpty()) {
-//            throw new IllegalArgumentException("hospital with id:" + id + " doesn't exist");
-//        }
-//        hospitalRepository.deleteById(id);
-//        return "id:" + id + " deleted";
-//    }
+    public String deleteHospital(String id) {
+        if (hospitalRepository.findById(id).isEmpty()) {
+            throw new IllegalArgumentException("hospital with id:" + id + " doesn't exist");
+        }
+        hospitalRepository.deleteById(id);
+        return "id:" + id + " deleted";
+    }
 }

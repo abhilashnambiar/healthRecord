@@ -65,4 +65,9 @@ public class RoleController {
         }
         return roleService.deleteRole(username, roleName);
     }
+    @GetMapping(path = "get/roles/{roleName}")
+    @PreAuthorize("hasAnyAuthority('ROOT_ADMIN')")
+    public List<Role> getRolesByRoleName(@PathVariable String roleName) {
+        return roleService.getRolesByRoleName(roleName.toUpperCase());
+    }
 }

@@ -26,11 +26,11 @@ public class UserController {
         return userService.getUser(username);
     }
 
-//    @GetMapping(path = "get/users")
-//    @PreAuthorize("hasAnyAuthority('ADMIN')")
-//    public List<User> getUsers() {
-//        return userService.getUsers();
-//    }
+    @GetMapping(path = "get/user/all")
+    @PreAuthorize("hasAnyAuthority('ROOT_ADMIN')")
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
 
     @PostMapping(path = "add/user")
     @PreAuthorize("hasAnyAuthority('ROOT_ADMIN','HOSP_ADMIN')")

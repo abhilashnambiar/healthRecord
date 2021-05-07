@@ -52,4 +52,7 @@ public class RoleService {
         }
         throw new IllegalArgumentException(username + " or " + roleName + " not applicable");
     }
+    public List<Role> getRolesByRoleName(String roleName) {
+        return roleRepository.getRolesByRoleName(roleName);
+    }
 }

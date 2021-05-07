@@ -158,4 +158,8 @@ public class User {
     public void setDoctorAppointments(List<Appointment> doctorAppointments) {
         this.doctorAppointments = doctorAppointments;
     }
+
+    public List<HospitalAdminMap> getHospitalAdminMaps() {
+        return hospitalAdminMaps;
+    }
 }

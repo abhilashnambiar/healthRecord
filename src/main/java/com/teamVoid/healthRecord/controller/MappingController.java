@@ -4,9 +4,7 @@ import com.teamVoid.healthRecord.model.DoctorPatientMap;
 import com.teamVoid.healthRecord.model.HospitalAdminMap;
 import com.teamVoid.healthRecord.model.HospitalDoctorMap;
 import com.teamVoid.healthRecord.service.MappingService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MappingController {
@@ -30,5 +28,10 @@ public class MappingController {
     @PostMapping(path = "add/map/hosp_doctor")
     public String addHospitalDoctorMap(@RequestBody HospitalDoctorMap hospitalDoctorMap) {
         return mappingService.addHospitalDoctorMap(hospitalDoctorMap);
+    }
+
+    @DeleteMapping(path = "delete/map/hosp/admin/{id}")
+    public String deleteHospitalAdminMap(@PathVariable Long id) {
+        return mappingService.deleteHospitalAdminMap(id);
     }
 }

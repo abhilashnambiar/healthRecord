@@ -58,4 +58,10 @@ public class MappingService {
         hospitalDoctorMapRepository.save(hospitalDoctorMap);
         return "doctor:" + hospitalDoctorMap.getDoctorId() + "mapped with hospital:" + hospitalDoctorMap.getHospitalId();
     }
+    public String deleteHospitalAdminMap(Long id) {
+        hospitalAdminMapRepository.deleteById(id);
+        return "id " + id + " map deleted with admin";
+    }
+
+
 }

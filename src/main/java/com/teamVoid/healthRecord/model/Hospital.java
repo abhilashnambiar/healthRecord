@@ -75,4 +75,8 @@ public class Hospital {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public List<HospitalAdminMap> getHospitalAdminMaps() {
+        return hospitalAdminMaps;
+    }
 }
