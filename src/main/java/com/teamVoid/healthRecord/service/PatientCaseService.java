@@ -30,8 +30,8 @@ public class PatientCaseService {
     }
 
     public PatientCase getPatientCase(String username, Long id) {
-        PatientCase patientCase = patientCaseRepository.getOne(id);
-        if (patientCase.getUsername() != username) {
+        PatientCase patientCase = patientCaseRepository.getPatientCaseById(id);
+        if (!patientCase.getUsername().equals(username)) {
             throw new IllegalArgumentException(username + " not authorized to view case:" + id);
         }
         return patientCase;

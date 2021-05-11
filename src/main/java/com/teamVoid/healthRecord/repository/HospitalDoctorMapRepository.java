@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface HospitalDoctorMapRepository extends JpaRepository<HospitalDoctorMap, Long> {
 
-    List<String> getHospitalsByDoctorId(String doctorId);
+    List<HospitalDoctorMap> getHospitalsByDoctorId(String doctorId);
 }

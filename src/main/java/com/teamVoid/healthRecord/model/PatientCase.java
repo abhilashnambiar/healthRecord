@@ -37,4 +37,8 @@ public class PatientCase {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
 }

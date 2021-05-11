@@ -40,8 +40,15 @@ public class MappingService {
     }
 
     public boolean checkHospitalDoctorMap(String hospitalId, String doctorId) {
-        List<String> hospitals = hospitalDoctorMapRepository.getHospitalsByDoctorId(doctorId);
-        return hospitals.contains(hospitalId);
+        List<HospitalDoctorMap> hospitals = hospitalDoctorMapRepository.getHospitalsByDoctorId(doctorId);
+        for(HospitalDoctorMap i: hospitals)
+        {
+            if ((i.getDoctorId()).equals(doctorId))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String addDoctorPatientMap(DoctorPatientMap doctorPatientMap) {

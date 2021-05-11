@@ -10,4 +10,5 @@ import java.util.List;
 public interface PatientCaseRepository extends JpaRepository<PatientCase, Long> {
 
     List<PatientCase> getPatientCasesByUsername(String username);
+    PatientCase getPatientCaseById(Long id);
 }
