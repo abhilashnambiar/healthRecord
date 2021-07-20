@@ -39,12 +39,14 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         try {
             String key = "securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecure";
 
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(Keys.hmacShaKeyFor(key.getBytes())).parseClaimsJws(token);
+            @SuppressWarnings("deprecation")
+			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(Keys.hmacShaKeyFor(key.getBytes())).parseClaimsJws(token);
 
             Claims body = claimsJws.getBody();
             String username = body.getSubject();
 
-            var authorities = (List<Map<String, String>>)body.get("authorities");
+            @SuppressWarnings("unchecked")
+			var authorities = (List<Map<String, String>>)body.get("authorities");
 
             List<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream().map(
                     m -> new SimpleGrantedAuthority(m.get("authority"))

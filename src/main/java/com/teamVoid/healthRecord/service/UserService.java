@@ -1,10 +1,9 @@
 package com.teamVoid.healthRecord.service;
 
-import com.teamVoid.healthRecord.model.*;
-import com.teamVoid.healthRecord.repository.UserRepository;
-import com.teamVoid.healthRecord.security.ApplicationUserDetails;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,8 +11,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.List;
+import com.teamVoid.healthRecord.model.Doctor;
+import com.teamVoid.healthRecord.model.Patient;
+import com.teamVoid.healthRecord.model.Profile;
+import com.teamVoid.healthRecord.model.User;
+import com.teamVoid.healthRecord.repository.UserRepository;
+import com.teamVoid.healthRecord.security.ApplicationUserDetails;
 
 @Service
 public class UserService implements UserDetailsService {

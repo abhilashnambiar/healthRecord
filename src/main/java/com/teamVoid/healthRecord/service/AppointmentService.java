@@ -1,16 +1,15 @@
 package com.teamVoid.healthRecord.service;
 
-import com.teamVoid.healthRecord.model.Appointment;
-import com.teamVoid.healthRecord.model.Log;
-import com.teamVoid.healthRecord.model.User;
-import com.teamVoid.healthRecord.repository.AppointmentRepository;
-import com.teamVoid.healthRecord.repository.LogRepository;
-import com.teamVoid.healthRecord.repository.UserRepository;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import com.teamVoid.healthRecord.model.Appointment;
+import com.teamVoid.healthRecord.model.Log;
+import com.teamVoid.healthRecord.repository.AppointmentRepository;
+import com.teamVoid.healthRecord.repository.LogRepository;
 
 @Service
 public class AppointmentService {

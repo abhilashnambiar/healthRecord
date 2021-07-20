@@ -1,18 +1,21 @@
 package com.teamVoid.healthRecord.controller;
 
-import com.teamVoid.healthRecord.model.Role;
-import com.teamVoid.healthRecord.service.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.teamVoid.healthRecord.model.Role;
+import com.teamVoid.healthRecord.service.RoleService;
 
 @RestController
 public class RoleController {
@@ -34,7 +37,8 @@ public class RoleController {
     @PreAuthorize("hasAnyAuthority('ROOT_ADMIN','HOSP_ADMIN')")
     public String addRole(@RequestBody Role role) {
         role.setRoleName(role.getRoleName().toUpperCase());
-        List<SimpleGrantedAuthority> collection = (List<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        @SuppressWarnings("unchecked")
+		List<SimpleGrantedAuthority> collection = (List<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         boolean flag = false;
         for (SimpleGrantedAuthority i:collection) {
             if (i.getAuthority().equals("ROOT_ADMIN")) {
@@ -52,7 +56,8 @@ public class RoleController {
     @PreAuthorize("hasAnyAuthority('ROOT_ADMIN','HOSP_ADMIN')")
     public String deleteRole(@PathVariable("username") String username, @PathVariable("roleName") String roleName) {
         roleName = roleName.toUpperCase(Locale.ROOT);
-        List<SimpleGrantedAuthority> collection = (List<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        @SuppressWarnings("unchecked")
+		List<SimpleGrantedAuthority> collection = (List<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         boolean flag = false;
         for (SimpleGrantedAuthority i:collection) {
             if (i.getAuthority().equals("ROOT_ADMIN")) {

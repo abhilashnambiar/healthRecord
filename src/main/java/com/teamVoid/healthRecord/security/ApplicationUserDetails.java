@@ -12,7 +12,11 @@ import java.util.List;
 
 public class ApplicationUserDetails implements UserDetails {
 
-    private final User user;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8866339967278121579L;
+	private final User user;
 
     public ApplicationUserDetails(User user) {
         this.user = user;
